@@ -2,17 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 
-const Total = (props) =>{
-  return(
-    <>
-      <p>
-        Number of exercises {props.contentParts.parts[0].exercises +props.contentParts.parts[1].exercises + 
-                            props.contentParts.parts[2].exercises}
-      </p>
-    </>
-  )
-}
-
 // I added parts-id
 const course = {
   name: 'Half Stack application development',
@@ -31,7 +20,12 @@ const course = {
       id: 'compo01',
       name: 'State of a component',
       exercises: 14,
-    }
+    },
+    {
+      id: 'redux01',
+      name: 'Redux',
+      exercises: 11,
+    },
   ]
 }
 
