@@ -1,9 +1,14 @@
 import React from 'react'
 import Course from './components/Course'
 
-const App = ({course}) =>{
-
-    return <Course cdata={course} />
+const App = ({courses}) =>{
+    return (
+        <>
+            {courses.map((course)=>(
+                <Course key={course.id} cdata={course} />
+            ))}
+        </>
+    )
 }
 
 export default App;
