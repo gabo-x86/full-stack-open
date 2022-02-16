@@ -27,12 +27,17 @@ const Votes = ({index, points}) =>{
 }
 
 const Statistic = (props) =>{
-  const max = Math.max(...props.points);
-  const maxIndex = props.points.indexOf(max);
+  const max = () => {
+    return Math.max(...props.points);
+  }
+  const maxIndex = (maxNumber) => {
+    return props.points.indexOf(maxNumber);
+  }
+
   return(
     <>
-      <Anecdote index={maxIndex}/>
-      <Votes index={maxIndex}  points={props.points} />
+      <Anecdote index={maxIndex(max())}/>
+      <Votes index={maxIndex(max())}  points={props.points} />
     </>
   )
 }
