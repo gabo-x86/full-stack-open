@@ -1,8 +1,13 @@
 import React from "react";
+import Country from './Country'
 
 const Results = (props) =>{
-    if(props.countries[0] === undefined){
-        
+
+    const showCountry = (country) =>{
+        props.setCountry(<Country data={country}/>)
+    }
+
+    if(props.countries[0] === undefined){        
         return(
             <>
             <p>Your search doesn't match</p>
@@ -15,33 +20,20 @@ const Results = (props) =>{
             </>
         )
     }else if(props.countries.length === 1){
-        return(
-            <>
-            <h1>{props.countries[0].name.common}</h1>
-            <p>Capital: {props.countries[0].capital}</p>
-            <p>Population: {props.countries[0].population}</p>
-
-            <h2>Languages</h2>
-            <ul>
-                {
-                    Object.values(props.countries[0].languages).map((lang)=>{
-                        return <li key={lang}>{lang}</li>
-                    })
-                }
-            </ul>
-            <img src={props.countries[0].flags.svg} width='100' height='100'/>
-            </>
-        )
+        return <Country data={props.countries[0]}/>
     }else{
         return(
             <>
             <ul>
                 {
-                    props.countries.map((country)=>{
-                        return <li key={country.name.common}>{country.name.common}</li>
+                    props.countries.map((country)=>{                        
+                        return <li key={country.name.common}>{country.name.common} 
+                                    <button onClick={()=>showCountry(country)}>show</button>
+                                </li>
                     })
                 }
             </ul>
+            {props.country}
             </>
         )
     }

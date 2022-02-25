@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import React, {useState} from 'react';
 import Searchbar from './components/SearchBar';
 import Results from './components/Results';
 
@@ -8,12 +7,12 @@ import Results from './components/Results';
 function App() {
   const [ctrySearched, setCtrySearched] = useState('');
   const [countries, setCountries] = useState([]);
-  const [url, setUrl] = useState('')
-
+  const [country, setCountry] = useState([]);
+  
   return(
     <>
       <Searchbar ctrySearched={ctrySearched} setCtrySearched={setCtrySearched} setCountries={setCountries} />
-      <Results ctrySearched={ctrySearched} countries={countries} />
+      <Results ctrySearched={ctrySearched} countries={countries} setCountry={setCountry} country={country}/>
     </>
   )
   
