@@ -1,4 +1,5 @@
 import React from "react";
+import phonebookService from '../services/phonebook';
 
 const Phonebook = (props) =>{
 
@@ -9,16 +10,18 @@ const Phonebook = (props) =>{
             alert(`${props.newPerson.name} is already added to phonebook`)
         }else{
             const newRegister = {
-              name: props.newPerson.name,
-              number: props.newPerson.number,
+                name: props.newPerson.name,
+                number: props.newPerson.number,
             }
-            props.handleSetPersons(props.persons.concat(newRegister));
-            props.handleSetNewPerson({
-                name: '',
-                number: '',
-            });
+            phonebookService.create(newRegister).then(res =>{
+                console.log(`-->>`,res);
+                props.handleSetPersons(props.persons.concat(res));
+                props.handleSetNewPerson({
+                    name: '',
+                    number: '',
+                });
+            })
         }
-        
     }
 
     const handleNameChange = (event) =>{
