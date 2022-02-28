@@ -17,12 +17,19 @@ const create = (newObject) =>{
 
 const update = (id, newObject) =>{
     return axios
-                .put(`${baseUrl}/${id}`)
+                .put(`${baseUrl}/${id}`,newObject)
+                .then(res => res.data);
+}
+
+const del = (id) =>{
+    return axios
+                .delete(`${baseUrl}/${id}`)
                 .then(res => res.data);
 }
 
 export default{
     getAll,
     create,
-    update
+    update,
+    del
 }

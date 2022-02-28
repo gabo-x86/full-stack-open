@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react";
 import Names from './components/Names';
 import Phonebook from "./components/Phonebook";
 import FilterBar from "./components/FilterBar";
-import axios from "axios";
 import phonebookService from './services/phonebook';
 
 
@@ -33,7 +32,7 @@ const App = () =>{
                 newPerson={newPerson} handleSetNewPerson={setNewPerson} />
 
       <h2>Numbers</h2>
-      <Names persons={persons} searchedPerson={searchedPerson}/>
+      <Names persons={persons} searchedPerson={searchedPerson} setPersons={setPersons}/>
     </div>
 
   )

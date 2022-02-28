@@ -14,7 +14,6 @@ const Phonebook = (props) =>{
                 number: props.newPerson.number,
             }
             phonebookService.create(newRegister).then(res =>{
-                console.log(`-->>`,res);
                 props.handleSetPersons(props.persons.concat(res));
                 props.handleSetNewPerson({
                     name: '',
