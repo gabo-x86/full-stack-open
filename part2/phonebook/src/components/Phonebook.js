@@ -5,14 +5,22 @@ const Phonebook = (props) =>{
 
     const addNewPerson = (event) =>{
         event.preventDefault();
-
-        if(props.persons.filter((person)=> person.name===props.newPerson.name).length > 0){
-            alert(`${props.newPerson.name} is already added to phonebook`)
-        }else{
-            const newRegister = {
-                name: props.newPerson.name,
-                number: props.newPerson.number,
-            }
+        const person = props.persons.find(p => p.name === props.newPerson.name);
+        const newRegister = {
+            name: props.newPerson.name,
+            number: props.newPerson.number,
+        }
+        if(person !== undefined){
+            if(window.confirm(`${person.name} is already added to phonebook, replace the old number with a new one?`)){
+                phonebookService
+                                .update(person.id, newRegister)
+                                .then(res =>{
+                                    const personsUpdated = props.persons.map(p => p.id===res.id ? res : p);
+                                    props.handleSetPersons(personsUpdated);
+                                })
+            }  
+            //alert(`${props.newPerson.name} is already added to phonebook`)
+        }else{            
             phonebookService.create(newRegister).then(res =>{
                 props.handleSetPersons(props.persons.concat(res));
                 props.handleSetNewPerson({
