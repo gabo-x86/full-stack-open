@@ -18,15 +18,27 @@ const Phonebook = (props) =>{
                                     const personsUpdated = props.persons.map(p => p.id===res.id ? res : p);
                                     props.handleSetPersons(personsUpdated);
                                 })
+                                .catch(err =>{
+                                    props.handleSetNotification('information was already removed');
+                                    props.handleSetPersons(props.persons.filter(p => p.id !== person.id));
+                                    setTimeout(()=>{
+                                        props.handleSetNotification(null);
+                                    },5000);
+                                });
             }  
             //alert(`${props.newPerson.name} is already added to phonebook`)
         }else{            
             phonebookService.create(newRegister).then(res =>{
                 props.handleSetPersons(props.persons.concat(res));
-                props.handleSetNewPerson({
-                    name: '',
-                    number: '',
-                });
+
+                props.handleSetNotification('Added');
+                setTimeout(()=>{
+                    props.handleSetNotification(null);
+                    props.handleSetNewPerson({
+                        name: '',
+                        number: '',
+                    });
+                },5000);
             })
         }
     }
